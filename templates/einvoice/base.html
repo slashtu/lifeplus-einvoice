@@ -12,12 +12,13 @@
     <title>LifePlus 雲端生活家</title>
 
     {% load staticfiles %}
-    <link rel="stylesheet" type="text/css" href="{% static 'css/sb/css/bootstrap.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/sb/css/bootstrap.min.css' %}" />
     <link rel="stylesheet" type="text/css" href="{% static 'css/sb/css/plugins/metisMenu/metisMenu.min.css' %}" />
     <link rel="stylesheet" type="text/css" href="{% static 'css/sb/css/plugins/timeline.css' %}" />
     <link rel="stylesheet" type="text/css" href="{% static 'css/sb/css/sb-admin-2.css' %}" />
     <link rel="stylesheet" type="text/css" href="{% static 'css/sb/css/plugins/morris.css' %}" />
     <link rel="stylesheet" type="text/css" href="{% static 'css/sb/font-awesome-4.1.0/css/font-awesome.min.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/css/einvoice.css' %}" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Bootstrap Core CSS -->
@@ -55,25 +56,16 @@
 <!--<script src="{% static 'css/sb/js/plugins/morris/morris.min.js' %}" ></script>-->
 <!--<script src="{% static 'css/sb/js/plugins/morris/morris-data.js' %}" ></script>-->
 <script src="{% static 'css/sb/js/sb-admin-2.js' %}" ></script>
+<script src="{% static 'css/js/einvoice.js' %}" ></script>
 
-<div id="wrapper">
+<div id="wrapper" class="container app">
 
 <!-- Navigation -->
 <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
 <div class="navbar-header">
-    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-    </button>
-    <div class="mini-submenu">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-    </div>
+    <button type="button" id="sidebar-btn" class="sidebar-btn fa fa-bars"></button>
     <a class="navbar-brand" href="{{ EINVOICE_URL }}">LifePlus 發票網</a>
-    <span class="navbar-brand">welcome {{ username }}</span>
+    <span class="navbar-brand">歡迎回來!! {{ username }} {{ perms.user }}</span>
 </div>
 <!-- /.navbar-header -->
 
@@ -158,106 +150,137 @@
 </ul>
 <!-- /.navbar-top-links -->
 
-<div class="navbar-default sidebar" role="navigation">
-    <div class="sidebar-nav navbar-collapse">
-        <ul class="nav" id="side-menu">
-            <li>
-                <a class="active" href="{{ EINVOICE_URL }}"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
-            </li>
-            <li>
-                <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Charts<span class="fa arrow"></span></a>
-                <ul class="nav nav-second-level">
-                    <li>
-                        <a href="flot.html">Flot Charts</a>
-                    </li>
-                    <li>
-                        <a href="morris.html">Morris.js Charts</a>
-                    </li>
-                </ul>
-                <!-- /.nav-second-level -->
-            </li>
-            <li>
-                <a href="{{ EINVOICE_URL }}tables"><i class="fa fa-table fa-fw"></i> Tables</a>
-            </li>
-            <li>
-                <a href="{{ EINVOICE_URL }}forms"><i class="fa fa-edit fa-fw"></i> Forms</a>
-            </li>
-            <li>
-                <a href="#"><i class="fa fa-wrench fa-fw"></i> UI Elements<span class="fa arrow"></span></a>
-                <ul class="nav nav-second-level">
-                    <li>
-                        <a href="panels-wells.html">Panels and Wells</a>
-                    </li>
-                    <li>
-                        <a href="buttons.html">Buttons</a>
-                    </li>
-                    <li>
-                        <a href="notifications.html">Notifications</a>
-                    </li>
-                    <li>
-                        <a href="typography.html">Typography</a>
-                    </li>
-                    <li>
-                        <a href="grid.html">Grid</a>
-                    </li>
-                </ul>
-                <!-- /.nav-second-level -->
-            </li>
-            <li>
-                <a href="#"><i class="fa fa-sitemap fa-fw"></i> Multi-Level Dropdown<span class="fa arrow"></span></a>
-                <ul class="nav nav-second-level">
-                    <li>
-                        <a href="#">Second Level Item</a>
-                    </li>
-                    <li>
-                        <a href="#">Second Level Item</a>
-                    </li>
-                    <li>
-                        <a href="#">Third Level <span class="fa arrow"></span></a>
-                        <ul class="nav nav-third-level">
-                            <li>
-                                <a href="#">Third Level Item</a>
-                            </li>
-                            <li>
-                                <a href="#">Third Level Item</a>
-                            </li>
-                            <li>
-                                <a href="#">Third Level Item</a>
-                            </li>
-                            <li>
-                                <a href="#">Third Level Item</a>
-                            </li>
-                        </ul>
-                        <!-- /.nav-third-level -->
-                    </li>
-                </ul>
-                <!-- /.nav-second-level -->
-            </li>
-            <li>
-                <a href="#"><i class="fa fa-files-o fa-fw"></i> Sample Pages<span class="fa arrow"></span></a>
-                <ul class="nav nav-second-level">
-                    <li>
-                        <a href="blank.html">Blank Page</a>
-                    </li>
-                    <li>
-                        <a href="login.html">Login Page</a>
-                    </li>
-                </ul>
-                <!-- /.nav-second-level -->
-            </li>
-        </ul>
-    </div>
     <!-- /.sidebar-collapse -->
-</div>
+
 <!-- /.navbar-static-side -->
 </nav>
+    <div class="row">
+        <div id="sidebar" class="hidden">
+            <ul class="nav" id="side-menu">
+                <li>
+                    <a class="active" href="{{ EINVOICE_URL }}"><i class="fa fa-dashboard fa-fw"></i>Dashboard</a>
+                </li>
+                <li>
+                    <a href="#"><i class="fa fa-user fa-fw"></i>帳號管理<span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a href="flot.html">新增帳號</a>
+                        </li>
+                        <li>
+                            <a href="morris.html"></a>
+                        </li>
+                    </ul>
+                    <!-- /.nav-second-level -->
+                </li>
+                <li>
+                    <a href="#"><i class="fa fa-sitemap fa-fw"></i>組織管理<span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a href="{{ EINVOICE_URL }}terminal/add/">新增店家</a>
+                        </li>
+                        <li>
+                            <a href="morris.html"></a>
+                        </li>
+                    </ul>
+                    <!-- /.nav-second-level -->
+                </li>
+                <li>
+                    <a class="active" href="{{ EINVOICE_URL }}terminal/add/"><i class="fa fa-home fa-fw"></i>新增店家</a>
+                </li>
+                <li>
+                    <a class="active" href="{{ EINVOICE_URL }}report/"><i class="fa fa-list-alt fa-fw"></i>電子發票</a>
+                </li>
+                <li>
+                    <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Charts<span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a href="flot.html">Flot Charts</a>
+                        </li>
+                        <li>
+                            <a href="morris.html">Morris.js Charts</a>
+                        </li>
+                    </ul>
+                    <!-- /.nav-second-level -->
+                </li>
+                <li>
+                    <a href="{{ EINVOICE_URL }}tables"><i class="fa fa-table fa-fw"></i> Tables</a>
+                </li>
+                <li>
+                    <a href="{{ EINVOICE_URL }}forms"><i class="fa fa-edit fa-fw"></i> Forms</a>
+                </li>
+                <li>
+                    <a href="#"><i class="fa fa-wrench fa-fw"></i> UI Elements<span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a href="panels-wells.html">Panels and Wells</a>
+                        </li>
+                        <li>
+                            <a href="buttons.html">Buttons</a>
+                        </li>
+                        <li>
+                            <a href="notifications.html">Notifications</a>
+                        </li>
+                        <li>
+                            <a href="typography.html">Typography</a>
+                        </li>
+                        <li>
+                            <a href="grid.html">Grid</a>
+                        </li>
+                    </ul>
+                    <!-- /.nav-second-level -->
+                </li>
+                <li>
+                    <a href="#"><i class="fa fa-sitemap fa-fw"></i> Multi-Level Dropdown<span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a href="#">Second Level Item</a>
+                        </li>
+                        <li>
+                            <a href="#">Second Level Item</a>
+                        </li>
+                        <li>
+                            <a href="#">Third Level <span class="fa arrow"></span></a>
+                            <ul class="nav nav-third-level">
+                                <li>
+                                    <a href="#">Third Level Item</a>
+                                </li>
+                                <li>
+                                    <a href="#">Third Level Item</a>
+                                </li>
+                                <li>
+                                    <a href="#">Third Level Item</a>
+                                </li>
+                                <li>
+                                    <a href="#">Third Level Item</a>
+                                </li>
+                            </ul>
+                            <!-- /.nav-third-level -->
+                        </li>
+                    </ul>
+                    <!-- /.nav-second-level -->
+                </li>
+                <li>
+                    <a href="#"><i class="fa fa-files-o fa-fw"></i> Sample Pages<span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a href="blank.html">Blank Page</a>
+                        </li>
+                        <li>
+                            <a href="login.html">Login Page</a>
+                        </li>
+                    </ul>
+                    <!-- /.nav-second-level -->
+                </li>
+            </ul>
+        </div>
 
 {% block page %}{% endblock %}
+    </div>
 <!-- /#page-wrapper -->
-
 </div>
-<!-- /#wrapper -->
 
+
+<!-- /#wrapper -->
 <!-- jQuery -->
 <!--<script src="js/jquery.js"></script>-->
 

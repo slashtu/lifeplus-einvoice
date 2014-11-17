@@ -1,0 +1,26 @@
+.sidebar-btn {
+    float: left;
+    height: 50px;
+    padding: 15px 15px;
+    font-size: 18px;
+    line-height: 20px;
+    margin-right:10px;
+    /*border: 4px solid;*/
+    /*border-radius: 10px;*/
+}
+
+.hidden {
+    width: 10;
+    mergin-left: 0;
+}
+
+.row div {
+    /*-webkit-transition: width 0.3s ease, margin 0.3s ease;*/
+    /*-moz-transition: width 0.3s ease, margin 0.3s ease;*/
+    /*-o-transition: width 0.3s ease, margin 0.3s ease;*/
+    /*transition: width 0.3s ease, margin 0.3s ease;*/
+}
+
+.fa {
+    margin-right: 5px;
+}

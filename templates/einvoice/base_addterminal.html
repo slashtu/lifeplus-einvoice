@@ -1,0 +1,25 @@
+{% extends "einvoice/base.html" %}
+
+{% block page %}
+{% load staticfiles %}
+<div id="page-wrapper" class="col-md-12">
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">新增店家</h1>
+            <form action="" method="post">
+                {{ form.non_field_errors }}
+                {% csrf_token %}
+                {{ form.store_name.errors }}
+                {{ form }}
+                <!--<label for="id_name">Your name: </label>-->
+                <!--<input id="id_name" type="text" name="name" value="{{ current_name }}">-->
+                <input type="submit" value="OK">
+            </form>
+        </div>
+        <!-- /.col-lg-12 -->
+    </div>
+    <!-- /.row -->
+    <!-- /.row -->
+</div>
+<script src="{% static 'css/js/page.js' %}" ></script>
+{% endblock %}

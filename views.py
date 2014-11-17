@@ -4,13 +4,20 @@ from django.shortcuts import render_to_response
 from django.shortcuts import redirect
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
+from django.http import HttpResponseRedirect
+from django.contrib.auth.models import Permission, User
+# forms
+from einvoice.einvoice_forms import TerminalForm
+from einvoice.einvoice_forms import TerminalForm
+
 
 # Create your views here.
 
 @login_required(login_url='/einvoice/login/')
 def index(request):
-#    if not request.user.is_authenticated():
-#        return  redirect('/lifeplus/einvoice/login/')
+    user = request.user
+    permission = Permission.objects.get(codename='change_snippet')
+    user.user_permissions.add(permission)
 
     username = request.user.username
 
@@ -22,9 +29,51 @@ def index(request):
             context_instance=RequestContext(request)
         )
 
-def forms(request):
-    return render(request, 'einvoice/base_forms.html', '')
+@login_required(login_url='/einvoice/login/')
+def addTerminal(request):
 
+    if request.method == 'POST':
+        # create a form instance and populate it with data from the request:
+        form = TerminalForm(request.POST)
+        # check whether it's valid:
+        if form.is_valid():
+            form.group_1_id = 1
+            form.group_2_id = 1
+
+            form.save()
+            # process the data in form.cleaned_data as required
+            # ...
+            # redirect to a new URL:
+            return HttpResponseRedirect('/einvoice/')
+
+        # if a GET (or any other method) we'll create a blank form
+    else:
+        form = TerminalForm()
+
+    username = request.user.username
+
+    context_dict = {
+        'username': username,
+        'form': form,
+        }
+
+    return render_to_response(
+            'einvoice/base_addterminal.html',
+            context_dict,
+            context_instance=RequestContext(request)
+        )
+
+@login_required(login_url='/einvoice/login/')
+def forms(request):
+    username = request.user.username
+    context_dict = { 'username': username }
+    return render_to_response(
+            'einvoice/base_forms.html',
+            context_dict,
+            context_instance=RequestContext(request)
+        )
+
+@login_required(login_url='/einvoice/login/')
 def tables(request):
     return render(request, 'einvoice/base_tables.html', '')
 
