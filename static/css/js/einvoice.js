@@ -1,7 +1,7 @@
 $(function() {
 
     $('#sidebar-btn').on('click', function () {
-        $('#sidebar').toggleClass('hidden col-md-3');
+        $('#sidebar').toggleClass('lifeplus-sidebar lifeplus-sidebar-toggle');
         $('#page-wrapper').toggleClass('col-md-12 col-md-9');
     });
 

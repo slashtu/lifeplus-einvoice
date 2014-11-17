@@ -65,7 +65,7 @@
 <div class="navbar-header">
     <button type="button" id="sidebar-btn" class="sidebar-btn fa fa-bars"></button>
     <a class="navbar-brand" href="{{ EINVOICE_URL }}">LifePlus 發票網</a>
-    <span class="navbar-brand">歡迎回來!! {{ username }} {{ perms.user }}</span>
+    <span class="navbar-brand">歡迎回來!! {{ username }}</span>
 </div>
 <!-- /.navbar-header -->
 
@@ -155,7 +155,7 @@
 <!-- /.navbar-static-side -->
 </nav>
     <div class="row">
-        <div id="sidebar" class="hidden">
+        <div id="sidebar" class="col-md-3 lifeplus-sidebar">
             <ul class="nav" id="side-menu">
                 <li>
                     <a class="active" href="{{ EINVOICE_URL }}"><i class="fa fa-dashboard fa-fw"></i>Dashboard</a>
@@ -164,10 +164,13 @@
                     <a href="#"><i class="fa fa-user fa-fw"></i>帳號管理<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>
-                            <a href="flot.html">新增帳號</a>
+                            <a href="flot.html">新增群一帳號</a>
                         </li>
                         <li>
-                            <a href="morris.html"></a>
+                            <a href="flot.html">新增群二帳號</a>
+                        </li>
+                        <li>
+                            <a href="flot.html">新增一般帳號</a>
                         </li>
                     </ul>
                     <!-- /.nav-second-level -->
@@ -175,6 +178,12 @@
                 <li>
                     <a href="#"><i class="fa fa-sitemap fa-fw"></i>組織管理<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
+                        <li>
+                            <a href="flot.html" >新增群一</a>
+                        </li>
+                        <li>
+                            <a href="flot.html">新增群二</a>
+                        </li>
                         <li>
                             <a href="{{ EINVOICE_URL }}terminal/add/">新增店家</a>
                         </li>

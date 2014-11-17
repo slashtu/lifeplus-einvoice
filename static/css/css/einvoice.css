@@ -1,3 +1,11 @@
+.lifeplus-sidebar{
+    margin-left: -30%;
+}
+
+.lifeplus-sidebar-toggle{
+    margin-left: 0px;
+}
+
 .sidebar-btn {
     float: left;
     height: 50px;
@@ -15,10 +23,10 @@
 }
 
 .row div {
-    /*-webkit-transition: width 0.3s ease, margin 0.3s ease;*/
-    /*-moz-transition: width 0.3s ease, margin 0.3s ease;*/
-    /*-o-transition: width 0.3s ease, margin 0.3s ease;*/
-    /*transition: width 0.3s ease, margin 0.3s ease;*/
+    -webkit-transition: width 0.3s ease, margin 0.3s ease;
+    -moz-transition: width 0.3s ease, margin 0.3s ease;
+    -o-transition: width 0.3s ease, margin 0.3s ease;
+    transition: width 0.3s ease, margin 0.3s ease;
 }
 
 .fa {
