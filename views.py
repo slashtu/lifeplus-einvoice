@@ -8,7 +8,7 @@ from django.http import HttpResponseRedirect
 from django.contrib.auth.models import Permission, User
 # forms
 from einvoice.einvoice_forms import TerminalForm
-from einvoice.einvoice_forms import TerminalForm
+from einvoice.einvoice_forms import G1Form
 
 
 # Create your views here.
@@ -28,6 +28,41 @@ def index(request):
             context_dict,
             context_instance=RequestContext(request)
         )
+
+@login_required(login_url='/einvoice/login/')
+def addGroup1(request):
+
+    if request.method == 'POST':
+            # create a form instance and populate it with data from the request:
+            form = TerminalForm(request.POST)
+            # check whether it's valid:
+#            if form.is_valid():
+#                form.group_1_id = 1
+#                form.group_2_id = 1
+#
+#                form.save()
+#                # process the data in form.cleaned_data as required
+#                # ...
+#                # redirect to a new URL:
+#                return HttpResponseRedirect('/einvoice/')
+
+            # if a GET (or any other method) we'll create a blank form
+    else:
+        form = G1Form()
+
+    username = request.user.username
+
+    context_dict = {
+        'username': username,
+        'form': form,
+        }
+
+    return render_to_response(
+                'einvoice/base_g1.html',
+                context_dict,
+                context_instance=RequestContext(request)
+            )
+
 
 @login_required(login_url='/einvoice/login/')
 def addTerminal(request):

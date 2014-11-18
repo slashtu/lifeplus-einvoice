@@ -115,8 +115,8 @@ body {
     border-bottom: 0!important;
 }
 
-.sidebar .nav-second-level li a {
-    padding-left: 37px;
+#sidebar .nav-second-level li a {
+    margin-left: 15%;
 }
 
 .sidebar .nav-third-level li a {

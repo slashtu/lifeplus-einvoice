@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 
 class Group_1(models.Model):
     name = models.CharField(max_length=200)
-    leader = models.CharField(max_length=200, default='')
+    ubn = models.IntegerField(max_length=20)
     def __str__(self):
         return self.name
 
