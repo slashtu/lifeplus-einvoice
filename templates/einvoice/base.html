@@ -65,7 +65,7 @@
 <div class="navbar-header">
     <button type="button" id="sidebar-btn" class="sidebar-btn fa fa-bars"></button>
     <a class="navbar-brand" href="{{ EINVOICE_URL }}">LifePlus 發票網</a>
-    <span class="navbar-brand">歡迎回來!! {{ username }}</span>
+    <span class="navbar-brand">歡迎回來!! {{ user.employee.acl_group }}: {{ user.username }} </span>
 </div>
 <!-- /.navbar-header -->
 
@@ -164,13 +164,13 @@
                     <a href="#"><i class="fa fa-user fa-fw"></i>帳號管理<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>
-                            <a href="{{ EINVOICE_URL }}group1/add/" ><i class="fa fa-caret-right fa-fw"></i>新增群一帳號</a>
+                            <a href="{{ EINVOICE_URL }}register/super" ><i class="fa fa-caret-right fa-fw"></i>新增 Super 帳號</a>
                         </li>
                         <li>
-                            <a href="flot.html"><i class="fa fa-caret-right fa-fw"></i>新增群二帳號</a>
+                            <a href="{{ EINVOICE_URL }}register/manager"><i class="fa fa-caret-right fa-fw"></i>新增最高權限帳號</a>
                         </li>
                         <li>
-                            <a href="flot.html"><i class="fa fa-caret-right fa-fw"></i>新增一般帳號</a>
+                            <a href="{{ EINVOICE_URL }}register/staff"><i class="fa fa-caret-right fa-fw"></i>新增一般權限帳號</a>
                         </li>
                     </ul>
                     <!-- /.nav-second-level -->
@@ -182,7 +182,7 @@
                             <a href="{{ EINVOICE_URL }}group1/add/" ><i class="fa fa-caret-right fa-fw"></i>新增群一</a>
                         </li>
                         <li>
-                            <a href="{{ EINVOICE_URL }}terminal/add/" ><i class="fa fa-caret-right fa-fw"></i>新增群二</a>
+                            <a href="{{ EINVOICE_URL }}group2/add/" ><i class="fa fa-caret-right fa-fw"></i>新增群二</a>
                         </li>
                         <li>
                             <a href="{{ EINVOICE_URL }}terminal/add/" ><i class="fa fa-caret-right fa-fw"></i>新增店家</a>
@@ -281,6 +281,7 @@
         </div>
 
 {% block page %}{% endblock %}
+
     </div>
 <!-- /#page-wrapper -->
 </div>

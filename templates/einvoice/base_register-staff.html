@@ -1,0 +1,77 @@
+{% extends "einvoice/base.html" %}
+
+{% block page %}
+<div id="page-wrapper" class="col-md-12">
+    <div class="row">
+        {% if form.errors.items %}
+        <!-- error panel-->
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-body has-error">
+                        <p class="control-label">錯誤訊息: </p>
+                        {% for field, errors in form.errors.items %}
+                        {% for error in errors %}
+                        <p class="control-label">{{ field }}: {{ error }}</p>
+                        {% endfor %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        <div class="col-lg-12">
+            <h1 class="page-header">新增一般權限</h1>
+            <form action="" method="post">
+                {% csrf_token %}
+                <!--{{ form }}-->
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label" for="id_username" >帳號</label>
+                            <input id="id_username" name="username" class="form-control">
+                        </div>
+                        <div id="id_ubn_div" class="form-group">
+                            <label class="control-label" for="id_email">E-mail</label>
+                            <input id="id_email" name="email" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label" for="id_password1" >密碼</label>
+                            <input id="id_password1" name="password1" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="id_password2" >密碼確認</label>
+                            <input id="id_password2" name="password2" class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <input type="submit" value="OK">
+            </form>
+            <table class="tree">
+                <tr class="treegrid-1">
+                    <td>Root node</td><td>Additional info</td>
+                </tr>
+                <tr class="treegrid-2 treegrid-parent-1">
+                    <td>Node 1-1</td><td>Additional info</td>
+                </tr>
+                <tr class="treegrid-3 treegrid-parent-1">
+                    <td>Node 1-2</td><td>Additional info</td>
+                </tr>
+                <tr class="treegrid-4 treegrid-parent-3">
+                    <td>Node 1-2-1</td><td>Additional info</td>
+                </tr>
+            </table>
+        </div>
+        <!-- /.col-lg-12 -->
+    </div>
+</div>
+{% load staticfiles %}
+<script src="{% static 'css/tree/js/jquery.treegrid.js' %}" ></script>
+<link rel="stylesheet" type="text/css" href="{% static 'css/tree/css/jquery.treegrid.css' %}" />
+<!--<link rel="stylesheet" type="text/css" href="{% static 'css/tree/css/styles.css' %}" />-->
+
+<script type="text/javascript">
+    $('.tree').treegrid();
+</script>
+{% endblock %}

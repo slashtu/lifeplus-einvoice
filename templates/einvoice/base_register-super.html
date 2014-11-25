@@ -1,0 +1,28 @@
+{% if form.errors.items %}
+<!-- error panel-->
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-body has-error">
+                <p class="control-label">錯誤訊息: </p>
+                {% for field, errors in form.errors.items %}
+                {% for error in errors %}
+                <p class="control-label">{{ field }}: {{ error }}</p>
+                {% endfor %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+<form method="post" action="" >
+    {% csrf_token %}
+    <fieldset>
+        {{ form.errors }}
+        {{ form }}
+        <!-- Change this to a button or input when using this as a form -->
+        <input type="submit" class="btn btn-lg btn-success btn-block" value="register" />
+        <!--<input type="hidden" name="next" value="{{ EINVOICE_URL }}" />-->
+    </fieldset>
+</form>

@@ -4,10 +4,19 @@
 <div id="page-wrapper" class="col-md-12">
     <div class="row">
         <div class="col-lg-12">
-            <h1 class="page-header">新增群一</h1>
+            <h1 class="page-header">新增群二</h1>
         </div>
         <!-- /.col-lg-12 -->
     </div>
+
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
     {% if form.errors.items %}
     <!-- error panel-->
     <div class="row">
@@ -16,9 +25,9 @@
                 <div class="panel-body has-error">
                     <p class="control-label">錯誤訊息: </p>
                     {% for field, errors in form.errors.items %}
-                        {% for error in errors %}
-                            <p class="control-label">{{ field }}: {{ error }}</p>
-                        {% endfor %}
+                    {% for error in errors %}
+                    <p class="control-label">{{ field }}: {{ error }}</p>
+                    {% endfor %}
                     {% endfor %}
                 </div>
             </div>
@@ -36,20 +45,25 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label>公司名稱</label>
+                                    <label>群組名稱</label>
                                     {{ form.name }}
                                     <!--<input class="form-control">-->
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                <div id="id_ubn_div" class="form-group">
-                                    <label class="control-label" for="id_ubn">統一編號</label>
-                                    {{ form.ubn }}
-                                    <!--<p class="control-label" id="id_ubn_helper"></p>-->
+
+                                <div class="form-group">
+                                    <label>Selects</label>
+                                    {{ form.group_1 }}
                                 </div>
+                                <!--<div id="id_ubn_div" class="form-group">-->
+                                    <!--<label class="control-label" for="id_ubn">統一編號</label>-->
+                                    <!--{{ form.ubn }}-->
+                                    <!--&lt;!&ndash;<p class="control-label" id="id_ubn_helper"></p>&ndash;&gt;-->
+                                <!--</div>-->
                             </div>
-                          </div>
-                          <button type="submit" class="btn btn-primary btn-lg">儲存資料</button>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-lg">儲存資料</button>
                     </form>
                     <!-- /.form -->
                 </div>
@@ -61,5 +75,5 @@
     </div>
 </div>
 {% load staticfiles %}
-<script src="{% static 'css/js/base_g1.js' %}" ></script>
+<script src="{% static 'css/js/base_g2.js' %}" ></script>
 {% endblock %}

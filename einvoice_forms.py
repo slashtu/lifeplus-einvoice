@@ -1,15 +1,27 @@
 # -*- coding: utf-8 -*-
 
 from django import forms
-from django.forms import ModelForm, TextInput
+from django.forms import ModelForm, TextInput, Select
+from django.contrib.auth.forms import UserCreationForm
+
 
 # model
-from einvoice.models import Terminal
-from einvoice.models import Group_1
+from django.contrib.auth.models import User
+from einvoice.models import Terminal, Group_1, Group_2, Employee
+
 
 #class TerminalForm(forms.Form):
 #    store_name = forms.CharField(label='Store name', max_length=100)
 
+class RegisterForm( UserCreationForm ):
+    class Meta:
+            model = User
+            fields = ['username', 'password1', 'password2']
+            widgets = {
+                       'username': TextInput(attrs={'class': 'form-control'}),
+                       'password1': TextInput(attrs={'class': 'form-control'}),
+                       'password2': TextInput(attrs={'class': 'form-control'}),
+                               }
 
 class TerminalForm(ModelForm):
         class Meta:
@@ -21,6 +33,15 @@ class TerminalForm(ModelForm):
                        'terminal_no': TextInput(attrs={'class': 'form-control'}),
                    }
 
+class G2Form(ModelForm):
+        class Meta:
+           model = Group_2
+           fields = ['name', 'group_1']
+           widgets = {
+                       'name': TextInput(attrs={'class': 'form-control'}),
+                       'group_1': Select(attrs={'class': 'form-control'}),
+                   }
+
 
 class G1Form(ModelForm):
         class Meta:
@@ -30,3 +51,14 @@ class G1Form(ModelForm):
                        'name': TextInput(attrs={'class': 'form-control'}),
                        'ubn': TextInput(attrs={'class': 'form-control', 'placeholder': '請輸入八位數字'}),
                    }
+
+
+class EmployeeForm( ModelForm):
+        class Meta:
+            model = Employee
+#class UserCreateForm(UserCreationForm):
+#    email = forms.EmailField(required=True)
+#
+#    class Meta:
+#        model = User
+#        fields = ( "username", "email" )
