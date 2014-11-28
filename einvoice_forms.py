@@ -7,7 +7,7 @@ from django.contrib.auth.forms import UserCreationForm
 
 # model
 from django.contrib.auth.models import User
-from einvoice.models import Terminal, Group_1, Group_2, Employee
+from einvoice.models import Terminal, Group_1, Group_2, Employee, Group1_permission
 
 
 #class TerminalForm(forms.Form):
@@ -31,6 +31,8 @@ class TerminalForm(ModelForm):
                        'name': TextInput(attrs={'class': 'form-control'}),
                        'address': TextInput(attrs={'class': 'form-control'}),
                        'terminal_no': TextInput(attrs={'class': 'form-control'}),
+                       'group_1': Select(attrs={'class': 'form-control'}),
+                       'group_2': Select(attrs={'class': 'form-control'}),
                    }
 
 class G2Form(ModelForm):
@@ -52,10 +54,18 @@ class G1Form(ModelForm):
                        'ubn': TextInput(attrs={'class': 'form-control', 'placeholder': '請輸入八位數字'}),
                    }
 
-
-class EmployeeForm( ModelForm):
+class G1PermissionForm(ModelForm):
         class Meta:
-            model = Employee
+           model = Group1_permission
+           fields = ['group_1']
+           widgets = {
+                       'group_1': Select(attrs={'class': 'form-control'}),
+                   }
+
+
+class SelectStoreForm( forms.Form ):
+        selected = forms.BooleanField(required=False)
+
 #class UserCreateForm(UserCreationForm):
 #    email = forms.EmailField(required=True)
 #

@@ -1,0 +1,85 @@
+{% extends "einvoice/base.html" %}
+
+{% block page %}
+<div id="page-wrapper" class="col-md-12">
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">新增最高權限</h1>
+        </div>
+    </div>
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+    {% if user_form.errors.items %}
+    <!-- error panel-->
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-body has-error">
+                    <p class="control-label">錯誤訊息: </p>
+                    {% for field, errors in user_form.errors.items %}
+                    {% for error in errors %}
+                    <p class="control-label">{{ field }}: {{ error }}</p>
+                    {% endfor %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+    <form action="" method="post">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label" for="id_username" >帳號</label>
+                                    <input id="id_user-username" name="user-username" class="form-control">
+                                </div>
+                                <div id="id_ubn_div" class="form-group">
+                                    <div class="form-group">
+                                        <label>選擇群一</label>
+                                        {{ group1_form.group_1 }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label" for="id_password1" >密碼</label>
+                                    <input id="id_user-password1" name="user-password1" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label" for="id_password2" >密碼確認</label>
+                                    <input id="id_user-password2" name="user-password2" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--<div class="col-lg-12">-->
+                <!--<div class="panel panel-default">-->
+                    <!--<div class="panel-body">-->
+                        <!--<div class="form-group">-->
+                            <!--<label>選擇群一</label>-->
+                            <!--{{ form.group_1 }}-->
+                        <!--</div>-->
+                        <!--{{ group1_form.group_1 }}-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+            <div class="col-lg-12">
+                <button type="submit" class="btn btn-primary btn-lg">新增帳號</button>
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock %}

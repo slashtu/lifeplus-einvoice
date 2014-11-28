@@ -13,10 +13,10 @@ from django.views.generic import View
 
 
 # models
-from einvoice.models import Group_1, Employee
+from einvoice.models import Group_1, Employee, Group1_permission
 
 # forms
-from einvoice.einvoice_forms import TerminalForm, G1Form, G2Form, RegisterForm
+from einvoice.einvoice_forms import TerminalForm, G1Form, G2Form, RegisterForm, SelectStoreForm, G1PermissionForm
 #from einvoice.einvoice_forms import UserCreateForm
 from django.contrib.auth.forms import UserCreationForm
 
@@ -155,24 +155,102 @@ def register(request):
             }
 
     return render_to_response(
-            'einvoice/register.html',
+            'einvoice/base_register-super.html',
             context_dict,
             context_instance=RequestContext(request)
            )
 
 class RegisterSuperView( View ):
-    pass
+
+    def get( self, request):
+        form = UserCreationForm( prefix='user')
+        context_dict = {'user_form': form}
+
+        return render_to_response(
+                    'einvoice/base_register-super.html',
+                    context_dict,
+                    context_instance=RequestContext(request)
+                   )
+
+    def post( self, request):
+
+        form = UserCreationForm( request.POST, prefix='user')
+
+        if form.is_valid():
+            user = form.save()
+            acl = Employee( acl_group_id = 1, user_id = user.id)
+            acl.save()
+            messages.success(request, u'新增帳號成功 %s' % request.POST['user-username'])
+
+            return HttpResponseRedirect('/einvoice/')
+
+        else:
+            context_dict = { 'user_form': form}
+
+            return render_to_response(
+                        'einvoice/base_register-super.html',
+                        context_dict,
+                        context_instance=RequestContext(request)
+                            )
+
 
 class RegisterManagerView( View ):
-    pass
+
+    def get( self, request):
+        user_form = UserCreationForm( prefix='user')
+        group1_form = G1PermissionForm( prefix='group1')
+
+        context_dict = {
+                        'user_form': user_form,
+                        'group1_form': group1_form,
+                       }
+
+        return render_to_response(
+                    'einvoice/base_register-manager.html',
+                    context_dict,
+                    context_instance=RequestContext(request)
+                   )
+
+    def post( self, request):
+
+        form = UserCreationForm( request.POST, prefix='user')
+
+        if form.is_valid():
+            user = form.save()
+
+            # save acl of user
+            acl = Employee( acl_group_id = 2, user_id = user.id)
+            acl.save()
+
+            # save group1 of user
+            print request.POST
+            group = request.POST['group1-group_1']
+            group1_permission = Group1_permission( group_1_id = group, user_id = user.id )
+            group1_permission.save()
+
+            messages.success(request, u'新增最高權限帳號成功 %s' % request.POST['user-username'])
+
+            return HttpResponseRedirect('/einvoice/')
+
+        else:
+            context_dict = { 'user_form': form}
+
+            return render_to_response(
+                        'einvoice/base_register-manager.html',
+                        context_dict,
+                        context_instance=RequestContext(request)
+                            )
 
 class RegisterStaffView( View ):
 
     def get(self, request):
 
-        form = UserCreationForm()
+        user_form = UserCreationForm( prefix="user")
+        store_form = SelectStoreForm( prefix="store")
 
-        context_dict = { 'form': form}
+        context_dict = { 'user_form': user_form,
+                         'store_form': store_form,
+                         }
 
         return render_to_response(
                 'einvoice/base_register-staff.html',
@@ -181,18 +259,18 @@ class RegisterStaffView( View ):
             )
 
     def post(self, request):
+        user_form = UserCreationForm( request.POST, prefix="user")
+        sotre_form = SelectStoreForm( request.POST, prefix="store")
 
-        form = UserCreationForm(request.POST)
-
-        if form.is_valid():
-            user = form.save()
+        if user_form.is_valid():
+            user = user_form.save()
             acl = Employee( acl_group_id = 3, user_id = user.id)
             acl.save()
 
             return HttpResponseRedirect('/einvoice/')
 
         else:
-            context_dict = { 'form': form}
+            context_dict = { 'user_form': user_form}
             return render_to_response(
                         'einvoice/base_register-staff.html',
                         context_dict,

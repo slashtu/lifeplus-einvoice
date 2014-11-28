@@ -54,3 +54,8 @@ class Terminal_permission(models.Model):
     terminal = models.ForeignKey(Terminal)
 
 
+class Group1_permission(models.Model):
+    user = models.ForeignKey(User)
+    group_1 = models.ForeignKey(Group_1)
+
+

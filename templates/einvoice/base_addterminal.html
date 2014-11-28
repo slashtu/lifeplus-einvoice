@@ -5,21 +5,76 @@
     <div class="row">
         <div class="col-lg-12">
             <h1 class="page-header">新增店家</h1>
-            <form action="" method="post">
-                {{ form.non_field_errors }}
-                {% csrf_token %}
-                {{ form.store_name.errors }}
-                {{ form }}
-                <!--<label for="id_name">Your name: </label>-->
-                <!--<input id="id_name" type="text" name="name" value="{{ current_name }}">-->
-                <input type="submit" value="OK">
-            </form>
         </div>
         <!-- /.col-lg-12 -->
     </div>
-    <!-- /.row -->
-    <!-- /.row -->
+
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+    {% if form.errors.items %}
+    <!-- error panel-->
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-body has-error">
+                    <p class="control-label">錯誤訊息: </p>
+                    {% for field, errors in form.errors.items %}
+                    {% for error in errors %}
+                    <p class="control-label">{{ field }}: {{ error }}</p>
+                    {% endfor %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- form panel -->
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <form role="form" method="post">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>群一</label>
+                                    {{ form.group_1 }}
+                                </div>
+                                <div class="form-group">
+                                    <label>商店名稱</label>
+                                    {{ form.name }}
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>群二</label>
+                                    {{ form.group_2 }}
+                                </div>
+                                <div class="form-group">
+                                    <label>店家代碼</label>
+                                    {{ form.terminal_no }}
+                                </div>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-lg">儲存資料</button>
+                    </form>
+                    <!-- /.form -->
+                </div>
+                <!-- /.panel-body -->
+            </div>
+            <!-- /.panel -->
+        </div>
+        <!-- /.col-lg-12 -->
+    </div>
 </div>
 {% load staticfiles %}
-<script src="{% static 'css/js/page.js' %}" ></script>
+<script src="{% static 'css/js/base_g2.js' %}" ></script>
 {% endblock %}
