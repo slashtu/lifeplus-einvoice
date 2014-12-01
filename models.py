@@ -12,7 +12,7 @@ class Acl_group(models.Model):
         return '%s' % (self.name)
 
 
-class Employee(models.Model):
+class User_group(models.Model):
     user = models.OneToOneField(User)
     acl_group = models.ForeignKey(Acl_group, default=2)
 

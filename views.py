@@ -13,7 +13,7 @@ from django.views.generic import View
 
 
 # models
-from einvoice.models import Group_1, Employee, Group1_permission
+from einvoice.models import Group_1, User_group, Group1_permission
 
 # forms
 from einvoice.einvoice_forms import TerminalForm, G1Form, G2Form, RegisterForm, SelectStoreForm, G1PermissionForm
@@ -144,7 +144,7 @@ def register(request):
             # check whether it's valid:
             if form.is_valid():
                 user = form.save()
-                acl = Employee( acl_group_id = 1, user_id = user.id)
+                acl = User_group( acl_group_id = 1, user_id = user.id)
                 acl.save()
 
     else:
@@ -178,7 +178,7 @@ class RegisterSuperView( View ):
 
         if form.is_valid():
             user = form.save()
-            acl = Employee( acl_group_id = 1, user_id = user.id)
+            acl = User_group( acl_group_id = 1, user_id = user.id)
             acl.save()
             messages.success(request, u'新增帳號成功 %s' % request.POST['user-username'])
 
@@ -219,7 +219,7 @@ class RegisterManagerView( View ):
             user = form.save()
 
             # save acl of user
-            acl = Employee( acl_group_id = 2, user_id = user.id)
+            acl = User_group( acl_group_id = 2, user_id = user.id)
             acl.save()
 
             # save group1 of user
@@ -264,7 +264,7 @@ class RegisterStaffView( View ):
 
         if user_form.is_valid():
             user = user_form.save()
-            acl = Employee( acl_group_id = 3, user_id = user.id)
+            acl = User_group( acl_group_id = 3, user_id = user.id)
             acl.save()
 
             return HttpResponseRedirect('/einvoice/')

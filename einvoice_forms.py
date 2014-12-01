@@ -7,7 +7,7 @@ from django.contrib.auth.forms import UserCreationForm
 
 # model
 from django.contrib.auth.models import User
-from einvoice.models import Terminal, Group_1, Group_2, Employee, Group1_permission
+from einvoice.models import Terminal, Group_1, Group_2, User_group, Group1_permission
 
 
 #class TerminalForm(forms.Form):
