@@ -11,17 +11,15 @@ from django.contrib.auth.models import Permission, User
 from django.contrib import messages
 from django.views.generic import View
 
-
 # models
 from einvoice.models import Group_1, User_group, Group1_permission
 
 # forms
 from einvoice.einvoice_forms import TerminalForm, G1Form, G2Form, RegisterForm, SelectStoreForm, G1PermissionForm
-#from einvoice.einvoice_forms import UserCreateForm
 from django.contrib.auth.forms import UserCreationForm
 
-
-# Create your views here.
+# einvoice
+from einvoice.model_helper import Store
 
 @login_required(login_url='/einvoice/login/')
 def index(request):
@@ -246,10 +244,12 @@ class RegisterStaffView( View ):
     def get(self, request):
 
         user_form = UserCreationForm( prefix="user")
-        store_form = SelectStoreForm( prefix="store")
+#        store_form = SelectStoreForm( prefix="store")
+
+        Store.getStoreTree(group1_id = 1)
 
         context_dict = { 'user_form': user_form,
-                         'store_form': store_form,
+#                         'store_form': store_form,
                          }
 
         return render_to_response(
@@ -259,8 +259,9 @@ class RegisterStaffView( View ):
             )
 
     def post(self, request):
+
         user_form = UserCreationForm( request.POST, prefix="user")
-        sotre_form = SelectStoreForm( request.POST, prefix="store")
+#        sotre_form = SelectStoreForm( request.POST, prefix="store")
 
         if user_form.is_valid():
             user = user_form.save()
@@ -311,6 +312,9 @@ class Group2View( View):
                         context_dict,
                         context_instance=RequestContext(request)
                     )
+
+def tree(request):
+    return render(request, 'einvoice/tree.html', '')
 
 #def fb(request):
 #    return render(request, 'einvoice/fb.html', '')

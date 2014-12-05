@@ -7,8 +7,6 @@ var g1_controller = (function($){
 
     return {
 
-
-
         init: function(){
 
             var self = this;

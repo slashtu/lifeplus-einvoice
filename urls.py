@@ -16,6 +16,7 @@ urlpatterns = patterns('',
         url(r'^register/super', RegisterSuperView.as_view()),
         url(r'^register/manager', RegisterManagerView.as_view()),
         url(r'^register/staff', RegisterStaffView.as_view()),
+        url(r'^tree', views.tree, name='tree'),
 #        url(r'^fb/', views.fb, name='fb'),
         # ex: /polls/5/
 #        url(r'^(?P<question_id>\d+)/$', views.detail, name='detail'),

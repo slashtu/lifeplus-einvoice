@@ -1,5 +1,8 @@
+# -*- coding: utf-8 -*-
+
 from django.db import models
 from django.contrib.auth.models import User
+from django_extensions.db.fields import UUIDField
 
 
 class Acl_group(models.Model):
@@ -19,6 +22,7 @@ class User_group(models.Model):
 
 
 class Group_1(models.Model):
+    uuid = UUIDField(default=False)
     name = models.CharField(max_length=200)
     ubn = models.IntegerField(max_length=20)
     def __str__(self):
@@ -29,13 +33,18 @@ class Group_1(models.Model):
 
 
 class Group_2(models.Model):
+    uuid = UUIDField(default=False)
     group_1 = models.ForeignKey(Group_1)
     name = models.CharField(max_length=200)
     def __str__(self):
         return self.name
 
+    def __unicode__(self):
+        return '%s' % (self.name)
+
 
 class Terminal(models.Model):
+    uuid = UUIDField(default=False)
     group_1 = models.ForeignKey( Group_1)
     group_2 = models.ForeignKey( Group_2, null=True, blank=True)
     name = models.CharField( max_length=200, default='')

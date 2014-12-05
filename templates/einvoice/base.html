@@ -12,13 +12,13 @@
     <title>LifePlus 雲端生活家</title>
 
     {% load staticfiles %}
-    <link rel="stylesheet" type="text/css" href="{% static 'css/sb/css/bootstrap.min.css' %}" />
-    <link rel="stylesheet" type="text/css" href="{% static 'css/sb/css/plugins/metisMenu/metisMenu.min.css' %}" />
-    <link rel="stylesheet" type="text/css" href="{% static 'css/sb/css/plugins/timeline.css' %}" />
-    <link rel="stylesheet" type="text/css" href="{% static 'css/sb/css/sb-admin-2.css' %}" />
-    <link rel="stylesheet" type="text/css" href="{% static 'css/sb/css/plugins/morris.css' %}" />
-    <link rel="stylesheet" type="text/css" href="{% static 'css/sb/font-awesome-4.1.0/css/font-awesome.min.css' %}" />
-    <link rel="stylesheet" type="text/css" href="{% static 'css/css/einvoice.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'einvoice/sb/css/bootstrap.min.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'einvoice/sb/css/plugins/metisMenu/metisMenu.min.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'einvoice/sb/css/plugins/timeline.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'einvoice/sb/css/sb-admin-2.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'einvoice/sb/css/plugins/morris.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'einvoice/sb/font-awesome-4.1.0/css/font-awesome.min.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'einvoice/css/einvoice.css' %}" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Bootstrap Core CSS -->
@@ -49,14 +49,14 @@
 </head>
 
 <body>
-<script src="{% static 'css/sb/js/jquery.js' %}" ></script>
-<script src="{% static 'css/sb/js/bootstrap.min.js' %}" ></script>
-<script src="{% static 'css/sb/js/plugins/metisMenu/metisMenu.min.js' %}" ></script>
+<script src="{% static 'einvoice/sb/js/jquery.js' %}" ></script>
+<script src="{% static 'einvoice/sb/js/bootstrap.min.js' %}" ></script>
+<script src="{% static 'einvoice/sb/js/plugins/metisMenu/metisMenu.min.js' %}" ></script>
 <!--<script src="{% static 'css/sb/js/plugins/morris/raphael.min.js' %}" ></script>-->
 <!--<script src="{% static 'css/sb/js/plugins/morris/morris.min.js' %}" ></script>-->
 <!--<script src="{% static 'css/sb/js/plugins/morris/morris-data.js' %}" ></script>-->
-<script src="{% static 'css/sb/js/sb-admin-2.js' %}" ></script>
-<script src="{% static 'css/js/einvoice.js' %}" ></script>
+<script src="{% static 'einvoice/sb/js/sb-admin-2.js' %}" ></script>
+<script src="{% static 'einvoice/js/einvoice.js' %}" ></script>
 
 <div id="wrapper" class="container app">
 
@@ -65,7 +65,7 @@
 <div class="navbar-header">
     <button type="button" id="sidebar-btn" class="sidebar-btn fa fa-bars"></button>
     <a class="navbar-brand" href="{{ EINVOICE_URL }}">LifePlus 發票網</a>
-    <span class="navbar-brand">歡迎回來!! {{ user.employee.acl_group }}: {{ user.username }} </span>
+    <span class="navbar-brand">歡迎回來!! {{ user.user_group.acl_group.name }}: {{ user.username }} </span>
 </div>
 <!-- /.navbar-header -->
 
