@@ -246,10 +246,10 @@ class RegisterStaffView( View ):
         user_form = UserCreationForm( prefix="user")
 #        store_form = SelectStoreForm( prefix="store")
 
-        Store.getStoreTree(group1_id = 1)
+        tree = Store.getStoreTree(group1_id = 1)
 
         context_dict = { 'user_form': user_form,
-#                         'store_form': store_form,
+                         'store_tree': tree,
                          }
 
         return render_to_response(
