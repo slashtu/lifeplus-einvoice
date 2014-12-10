@@ -10,7 +10,7 @@ class Store():
         stores = Terminal.objects.filter( group_1_id = group1_id )
         group1 = Group_1.objects.get( pk= group1_id )
 
-        g1_tree = { 'name': group1.name }
+        g1_tree = { 'name': group1.name, 'type':'group1' }
         sub_tree = {}
 
         for store in stores:
@@ -21,7 +21,7 @@ class Store():
                 # key of group2 is existed, then add to 'child'
                 if store.group_2.uuid in sub_tree:
                     group2_uuid = store.group_2.uuid
-                    sub_tree[group2_uuid]['child'][store.uuid] = { 'name': store.name }
+                    sub_tree[group2_uuid]['child'][store.uuid] = { 'name': store.name, 'type':'terminal' }
 
                 # there is no attribure of group2
                 else:
@@ -32,14 +32,14 @@ class Store():
                                 'child': {},
                              }
 
-                    group2['child'][store.uuid] = { 'name': store.name }
+                    group2['child'][store.uuid] = { 'name': store.name, 'type':'terminal' }
 
                     uuid = group2['uuid']
                     sub_tree[uuid] = group2
 
             # parent is group1
             else:
-                sub_tree[store.uuid] = { 'name': store.name }
+                sub_tree[store.uuid] = { 'name': store.name, 'type':'terminal' }
 
         g1_tree['child'] = sub_tree
 

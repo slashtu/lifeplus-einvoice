@@ -42,3 +42,9 @@
     margin-right: 10px;
     color: #FF8800;
 }
+
+.fixed {
+    position: fixed;
+    bottom: 50px;
+    right: 50px;
+}

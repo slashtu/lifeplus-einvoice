@@ -66,78 +66,41 @@
                                     <ul>
                                         <li>
                                             <span><i class=""></i>{{ store_tree.name }}</span>
-                                            {% for obj in store_tree.child %}
-                                                {{ obj|get:store_tree.child }}
-                                            {% endfor %}
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="tree">
-                                    <ul>
-                                        <li>
-                                            <span><i class=""></i>雲端生活家</span>
                                             <ul>
-                                                <li>
-                                                    <span><i class=""></i>北區</span>
-                                                    <ul>
+                                            {% with g2=store_tree|getG2 %}
+                                                {% for group in g2 %}
+                                                    <li>
+                                                        <span><i class=""></i>{{ group|get:"name" }}</span>
+                                                        <ul>
+                                                        {% with terminals=group|getTerminal %}
+                                                        {% for terminal in terminals %}
                                                         <li>
-                                                            <span class="leaf"><i class="fa fa-home fa-fw"></i>雲端南港店</span>
-                                                            <input type="hidden" name="lifeplus" value="true">
+                                                            <span class="leaf"><i class="fa fa-home fa-fw"></i>{{ terminal|get:"name" }}</span>
                                                         </li>
-                                                    </ul>
-                                                </li>
+                                                        {% endfor %}
+                                                        {% endwith %}
+                                                        </ul>
+                                                    </li>
+                                                {% endfor %}
+                                            {% endwith %}
+                                            {% with terminals=store_tree|getTerminal %}
+                                                {% for terminal in terminals %}
                                                 <li>
-                                                    <span class="leaf"><i class="fa fa-home fa-fw"></i>台北車站</span>
+                                                    <span class="leaf"><i class="fa fa-home fa-fw"></i>{{ terminal|get:"name" }}</span>
                                                 </li>
+                                                {% endfor %}
+                                            {% endwith %}
                                             </ul>
                                         </li>
                                     </ul>
                                 </div>
+                            </div>
                         </div>
-                            <input id="submit-button" type="submit" value="OK">
+                        <button type="submit" class="btn btn-primary btn-lg fixed">儲存資料</button>
                     </form>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="tree">
-                <ul>
-                    <li>
-                        <span><i class=""></i>雲端生活家</span>
-                        <ul>
-                            <li>
-                                <span><i class=""></i>北區</span>
-                                <ul>
-                                    <li>
-                                        <span class="leaf"><i class="fa fa-home fa-fw"></i>雲端南港店</span>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li>
-                                <span class="leaf"><i class="fa fa-home fa-fw"></i>台北車站</span>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-            <!--<table class="tree">-->
-                <!--<tr class="treegrid-1">-->
-                    <!--<td>Root node</td><td><input type="checkbox" value=""></td>-->
-                <!--</tr>-->
-                <!--<tr class="treegrid-2 treegrid-parent-1">-->
-                    <!--<td>Node 1-1</td><td>Additional info</td>-->
-                <!--</tr>-->
-                <!--<tr class="treegrid-3 treegrid-parent-1">-->
-                    <!--<td>Node 1-2</td><td>Additional info</td>-->
-                <!--</tr>-->
-                <!--<tr class="treegrid-4 treegrid-parent-3">-->
-                    <!--<td>Node 1-2-1</td><td>Additional info</td>-->
-                <!--</tr>-->
-            <!--</table>-->
-        </div>
-        <!-- /.col-lg-12 -->
     </div>
 </div>
 {% load staticfiles %}
